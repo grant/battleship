@@ -3,9 +3,13 @@
 An API for playing the game [**Battleship**](https://en.wikipedia.org/wiki/Battleship_(game)).
 
 Battleship is a guessing game played by two players.
+When a ship is sunk, you announce "You sank my battleship" (or 3-size, etc.) 
 
 ## Game
 Create game.
+- Board(width, height)
+  - x tiles: (0 .. width-1)
+  - y tiles: (0 .. height - 1)
 
 ## TODO
 - Create a basic API for a normal game.
@@ -27,5 +31,5 @@ Inspired by an interview question.
 Run tests:
 ```
 yarn
-npm test
+npm test -- --watch
 ```
