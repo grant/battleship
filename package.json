@@ -1,0 +1,11 @@
+{
+  "name": "battleship",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'TODO'"
+  },
+  "author": "Grant Timmerman",
+  "license": "MIT"
+}
