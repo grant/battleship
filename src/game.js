@@ -7,14 +7,16 @@ export default class Game {
     HIT: 'HIT',
     MISS: 'MISS',
     ALREADY_FIRED: 'ALREADY_FIRED',
-    OUT_OF_BOUNDS: 'OUT_OF_BOUNDS'
   };
 
   players = {
     /*
     {playerID}: {
       ships: {
-        {shipID}: true // alive
+        {shipID}: {
+          hitsLeft: 2
+          length: 3
+        }
       },
       board: {
         {shipID}: [x1, y1, x2, y2]
@@ -41,6 +43,7 @@ export default class Game {
       id,
       ships: {},
       board: {},
+      fires: {},
     };
     return id;
   }
@@ -62,11 +65,9 @@ export default class Game {
    * @param y The fire y position.
    */
   fire(firePlayerID, targetPlayerID, x, y) {
-    let result = {};
-
     // INVALID_USER_ID
     if (!(firePlayerID in this.players) || !(targetPlayerID in this.players)) {
-      result = {
+      return {
         result: Game.FIRE_RESULTS.INVALID_USER_ID
       };
     }
@@ -75,19 +76,39 @@ export default class Game {
     // ALREADY_FIRED
     let xy = `${x},${y}`;
     if (targetPlayer.fires[xy]) {
-      result = {
+      return {
         result: Game.FIRE_RESULTS.ALREADY_FIRED
       };
     }
 
+    // Assume miss
+    targetPlayer.fires[xy] = {
+      result: Game.FIRE_RESULTS.MISS
+    };
+
     // Go through each ship and see if the fire intersects the ship
     let targetShips = Object.keys(targetPlayer.board);
     for (let i = 0; i < targetShips.length; ++i) {
-      let ship = targetShips[i];
-      console.log('hi');
+      let shipID = targetShips[i];
+      let s = targetPlayer.board[shipID];
+      if (segments.intersect([s[0], s[2]], x) &&
+          segments.intersect([s[1], s[3]], y)) {
+
+        // valid hit
+        --targetPlayer.ships[shipID].hitsLeft;
+        targetPlayer.fires[xy] = {};
+        if (targetPlayer.ships[shipID].hitsLeft === 0) {
+          targetPlayer.fires[xy].sunkShipLength = targetPlayer.ships[shipID].length;
+        }
+        targetPlayer.fires[xy].result = Game.FIRE_RESULTS.HIT;
+
+        return targetPlayer.fires[xy];
+      }
     }
 
-    return result;
+    return {
+      result: Game.FIRE_RESULTS.MISS
+    };
   }
 
   /**
@@ -137,8 +158,12 @@ export default class Game {
       return false;
     }
 
-    // add the ship
-    player.ships[shipID] = true;
+    // add the ship (inclusive)
+    let length = segments.size([startX, endX]) + segments.size([startY, endY]) + 1;
+    player.ships[shipID] = {
+      hitsLeft: length,
+      length,
+    };
     player.board[shipID] = newShipPos;
     return true;
   }

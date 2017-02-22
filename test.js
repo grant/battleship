@@ -42,27 +42,24 @@ test('hit/miss', t => {
   let player1ID = game.addPlayer();
   let player2ID = game.addPlayer();
   //
-  game.addShip(player1ID, 1, 1, 3, 1);
+  game.addShip(player1ID, 1, 1, 2, 1);
   t.deepEqual(game.fire('foo', player1ID, 0, 1), {
     result: Game.FIRE_RESULTS.INVALID_USER_ID
   });
-  // t.deepEqual(game.fire(player2ID, player1ID, 0, 1), {
-  //   result: 'miss'
-  // });
-  // t.deepEqual(game.fire(player2ID, player1ID, 0, 1), {
-  //   result: 'already-fired'
-  // });
-  // t.deepEqual(game.fire(player2ID, player1ID, -3, 1), {
-  //   result: 'out-of-bounds'
-  // });
-  // t.deepEqual(game.fire(player2ID, player1ID, 1, 1), {
-  //   result: 'hit'
-  // });
-  // t.deepEqual(game.fire(player2ID, player1ID, 1, 1), {
-  //   result: 'hit'
-  // });
-  // t.deepEqual(game.fire(player2ID, player1ID, 1, 1), {
-  //   result: 'hit',
-  //   sunkShipLength: 3,
-  // });
+  t.deepEqual(game.fire(player2ID, player1ID, 0, 1), {
+    result: Game.FIRE_RESULTS.MISS
+  });
+  t.deepEqual(game.fire(player2ID, player1ID, 0, 1), {
+    result: Game.FIRE_RESULTS.ALREADY_FIRED
+  });
+  t.deepEqual(game.fire(player2ID, player1ID, 1, 1), {
+    result: Game.FIRE_RESULTS.HIT
+  });
+  t.deepEqual(game.fire(player2ID, player1ID, 1, 1), {
+    result: Game.FIRE_RESULTS.ALREADY_FIRED
+  });
+  t.deepEqual(game.fire(player2ID, player1ID, 2, 1), {
+    result: Game.FIRE_RESULTS.HIT,
+    sunkShipLength: 2,
+  });
 });
