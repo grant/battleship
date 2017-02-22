@@ -12,14 +12,14 @@ Create game.
   - y tiles: (0 .. height - 1)
 
 ## TODO
-- Create a basic API for a normal game.
-  - Create a new board
-  - Place ships on a board id
-  - Start a game with a board (validate the board)
-  - Hit an (x, y)
-    - Hit, Miss, Sunk(boat)
-- Create a UI for the API.
-- Make the game scale to hundreds of square tiles and thousands of ships of various lengths.
+- [x] Create a basic API for a normal game.
+  - [x] Create a new board
+  - [x] Place ships on a board id
+  - [x] Start a game with a board (validate the board)
+  - [x] Hit an (x, y)
+    - [x] Hit, Miss, Sunk(boat)
+- [ ] Create a UI for the API.
+- [ ] Make the game scale to hundreds of square tiles and thousands of ships of various lengths.
 
 # Inspiration
 Inspired by an interview question.
