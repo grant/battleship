@@ -18,7 +18,8 @@ Create game.
   - [x] Start a game with a board (validate the board)
   - [x] Hit an (x, y)
     - [x] Hit, Miss, Sunk(boat)
-- [ ] Create a UI for the API.
+- [x] Create a UI for the API.
+  - See https://github.com/grant/battleship-web
 - [ ] Make the game scale to hundreds of square tiles and thousands of ships of various lengths.
 
 # Inspiration
