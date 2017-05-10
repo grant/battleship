@@ -1,1 +1,2 @@
-module.export = 'battleship';
+const game = require('./game');
+module.exports = game;

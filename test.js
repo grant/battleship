@@ -1,4 +1,4 @@
-import Game from './src/Game';
+import Game from './src';
 import test from 'ava';
 
 test('new game', t => {

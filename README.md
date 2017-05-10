@@ -3,7 +3,9 @@
 An API for playing the game [**Battleship**](https://en.wikipedia.org/wiki/Battleship_(game)).
 
 Battleship is a guessing game played by two players.
-When a ship is sunk, you announce "You sank my battleship" (or 3-size, etc.) 
+When a ship is sunk, you announce "You sank my battleship" (or 3-size, etc.)
+
+See the test.js for usage.
 
 ## Game
 Create game.
